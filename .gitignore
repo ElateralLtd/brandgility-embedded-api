@@ -1,0 +1,28 @@
+# Build
+/lib
+
+# Build reports
+/reports
+
+# Environment variables
+.env
+
+# IDEs
+/.idea
+/.vscode
+
+# Logs
+*.log
+
+# Dependency directories
+/node_modules
+
+# macOS
+*.DS_Store
+
+# npm
+.npmrc
+
+# Linters cache
+.eslintcache
+.stylelintcache
