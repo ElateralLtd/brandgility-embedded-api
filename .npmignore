@@ -1,0 +1,65 @@
+# Source
+/src
+
+# Scripts
+/bin
+
+# Environment variables
+.env
+.env.default
+
+# Build reports
+/reports
+
+# IDEs
+/.idea
+.editorconfig
+
+# CircleCI
+/.circleci
+
+# Logs
+*.log
+
+# macOS
+*.DS_Store
+
+# npm
+.npmrc
+
+# yarn
+yarn.lock
+
+# git
+.gitignore
+
+# git hooks
+.huskyrc
+.commitlintrc.js
+.commit-header-test.js
+
+# Linters cache
+.eslintcache
+.stylelintcache
+
+# Linters config
+.eslintignore
+.eslintrc.js
+.stylelintrc.json
+
+# Storybook
+/.storybook
+
+# Build config
+webpack.*
+postcss.config.js
+.babelrc
+
+# Test config
+jest.*
+
+# Browserslist file
+browserslist
+
+# Contributing docs
+CONTRIBUTING.md
