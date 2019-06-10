@@ -15,16 +15,12 @@ class BrandgilityEmbeddedApi {
     const expectedEventSource = event.source === this.#targetWindow;
     const expectedEventType = Boolean(event.data) && event.data.identityKey === this.#identityKey;
     const expectedEvent = expectedEventSource && expectedEventType;
+    const hasHandler = Boolean(event.data) && this.#handlersByAction.has(event.data.action);
 
-    if (expectedEvent) {
-      if (this.#handlersByAction.has(event.data.action)) {
-        this.#handlersByAction.get(event.data.action).forEach((handler) => {
-          handler(event.data.payload);
-        });
-      } else {
-        // eslint-disable-next-line max-len
-        console.warn(`BrandgilityEmbeddedApi: no handler was defined for "${event.data.action}" action`);
-      }
+    if (expectedEvent && hasHandler) {
+      this.#handlersByAction.get(event.data.action).forEach((handler) => {
+        handler(event.data.payload);
+      });
     }
   }
 
