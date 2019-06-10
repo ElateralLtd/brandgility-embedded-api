@@ -1,5 +1,3 @@
-const getResolve = require('./webpack.resolve');
-
 module.exports = {
   "parser": "babel-eslint",
   "parserOptions": {
@@ -8,13 +6,10 @@ module.exports = {
   },
   "extends": [
     "eslint:recommended",
-    "plugin:import/errors",
     "plugin:jest/recommended",
     "plugin:unicorn/recommended",
-    "eslint-config-airbnb-base",
   ],
   "plugins": [
-    "eslint-plugin-import",
     "eslint-plugin-jest",
     "eslint-plugin-unicorn",
   ],
@@ -22,15 +17,6 @@ module.exports = {
     "es6": true,
     "jest": true,
     "browser": true,
-  },
-  "settings": {
-    "import/resolver": {
-      "webpack": {
-        "config": {
-          "resolve": getResolve(),
-        },
-      },
-    },
   },
   "rules": {
     "operator-linebreak": [ "error", "after" ],
