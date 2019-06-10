@@ -33,7 +33,7 @@ jobs:
           at: .
       - run:
           name: Run tests with code coverage
-          command: yarn run ci:test
+          command: yarn run ci:test:coverage
       - store_artifacts:
           path: reports/test/coverage
           prefix: coverage
