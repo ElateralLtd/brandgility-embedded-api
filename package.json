@@ -8,7 +8,7 @@
     "build": "webpack --env.production",
     "test": "eslint src --cache --max-warnings=0 --report-unused-disable-directives",
     "ci:test": "jest --coverage && yarn run coveralls",
-    "deploy": "yarn publish --new-version $npm_package_version",
+    "deploy": "yarn publish --access public --new-version $npm_package_version",
     "update-master-if-version-is-increased": "node ./bin/update-master-if-version-is-increased.js",
     "coveralls": "minicat reports/test/coverage/lcov.info | coveralls"
   },
