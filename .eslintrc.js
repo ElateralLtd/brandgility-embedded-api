@@ -72,21 +72,6 @@ module.exports = {
     "array-bracket-spacing": [ "error", "never" ],
     "array-bracket-newline": [ "error", "consistent" ],
 
-    "import/first": "error",
-    "import/no-anonymous-default-export": "error",
-    "import/no-cycle": "error",
-    "import/no-extraneous-dependencies": [ "error", { "devDependencies": [ "**/*.test.js", "**/stories.js" ] } ],
-    "import/no-useless-path-segments": "error",
-    "import/order": [ "error", {
-      "groups": [
-        [ "builtin", "external" ],
-        [ "internal" ],
-        [ "parent", "sibling", "index" ],
-      ],
-      "newlines-between": "always",
-    } ],
-    "import/prefer-default-export": "off",
-
     "jest/expect-expect": "error",
     "jest/prefer-strict-equal": "error",
     "jest/prefer-to-be-null": "error",
