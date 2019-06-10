@@ -1,0 +1,6 @@
+{
+  "hooks": {
+    "pre-push": "yarn run test",
+    "commit-msg": "node .commit-header-test.js && commitlint --env HUSKY_GIT_PARAMS",
+  }
+}

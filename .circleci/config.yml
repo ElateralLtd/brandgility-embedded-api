@@ -1,0 +1,143 @@
+job-defaults: &job-defaults
+  docker:
+    - image: circleci/node:12.1.0
+
+version: 2
+jobs:
+  prepare:
+    <<: *job-defaults
+    steps:
+      - checkout
+      - restore_cache:
+          key: dependency-cache-{{ checksum "yarn.lock" }}
+      - run:
+          name: Install packages
+          command: yarn --pure-lockfile --no-progress
+      - save_cache:
+          key: dependency-cache-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache/yarn
+      - run:
+          name: Prepare .env
+          command: |
+            echo NODE_ENV=production > .env
+      - persist_to_workspace:
+          root: .
+          paths:
+            - ./*
+
+  test-with-coverage:
+    <<: *job-defaults
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: Run tests with code coverage
+          command: yarn run ci:test:coverage
+      - store_artifacts:
+          path: reports/test/coverage
+          prefix: coverage
+      - store_artifacts:
+          path: reports/test/junit.xml
+          prefix: tests
+      - store_test_results:
+          path: reports/test/junit.xml
+  build:
+    <<: *job-defaults
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: Build
+          command: yarn run build
+      - persist_to_workspace:
+          root: .
+          paths:
+            - lib/*
+  build-without-persisting:
+    <<: *job-defaults
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: Build
+          command: yarn run build
+  deploy:
+    <<: *job-defaults
+    steps:
+      - attach_workspace:
+          at: .
+      - deploy:
+          command: yarn run deploy
+  update-master:
+    <<: *job-defaults
+    steps:
+      - attach_workspace:
+          at: .
+      - add_ssh_keys:
+          fingerprints:
+            - "07:8c:2b:72:8d:e7:ce:9b:8a:ed:0c:d2:e9:fe:06:6b"
+      - run:
+          name: Create ~/.ssh
+          command: |
+            mkdir -p ~/.ssh
+      - run:
+          name: Disable SSH strict host key checking
+          command: |
+            cat >> ~/.ssh/config << EOF
+            VerifyHostKeyDNS yes
+            StrictHostKeyChecking no
+            EOF
+      - run:
+          name: Update master if version is increased
+          command: yarn run update-master-if-version-is-increased
+
+workflows:
+  version: 2
+
+  check-status:
+    jobs:
+      - prepare:
+          context: org-global
+          filters:
+            branches:
+              ignore: master
+      - test-with-coverage:
+          context: org-global
+          requires:
+            - prepare
+      - build-without-persisting:
+          context: org-global
+          requires:
+            - prepare
+  update-master:
+    jobs:
+      - prepare:
+          context: org-global
+          filters:
+            branches:
+              only: develop
+      - update-master:
+          context: org-global
+          requires:
+            - prepare
+  build-and-deploy:
+    jobs:
+      - prepare:
+          context: org-global
+          filters:
+            branches:
+              only: master
+      - test-with-coverage:
+          context: org-global
+          requires:
+            - prepare
+      - build:
+          context: org-global
+          requires:
+            - prepare
+      - deploy:
+          context: org-global
+          requires:
+            - build
+            - test-with-coverage
