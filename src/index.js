@@ -1,3 +1,1 @@
-class BrandgilityEmbeddedApi { }
-
-export default BrandgilityEmbeddedApi;
+export default from './lib';

@@ -71,6 +71,7 @@ module.exports = {
     ],
     "array-bracket-spacing": [ "error", "never" ],
     "array-bracket-newline": [ "error", "consistent" ],
+    "lines-between-class-members": [ "error", "always", { exceptAfterSingleLine: true } ],
 
     "import/no-extraneous-dependencies": [ "error", { "devDependencies": [ "**/*.test.js" ] } ],
 
