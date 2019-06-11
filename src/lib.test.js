@@ -1,15 +1,20 @@
 import BrandgilityEmbeddedApi from './lib';
 
-test('callback should be called when appropriate action + key has been received', () => {
-  const callback = jest.fn();
-  const iframe = document.createElement('iframe');
-  const identityKey = '@BrandgilityEmbeddedApi';
-  const action = 'some action';
+let iframe;
+let brandgilityEmbeddedApi;
+let callback;
 
+const identityKey = '@BrandgilityEmbeddedApi';
+const action = 'some action';
+
+beforeEach(() => {
+  callback = jest.fn();
+  iframe = document.createElement('iframe');
   document.body.append(iframe);
+  brandgilityEmbeddedApi = new BrandgilityEmbeddedApi(iframe.contentWindow);
+});
 
-  const brandgilityEmbeddedApi = new BrandgilityEmbeddedApi(iframe.contentWindow);
-
+test('callback should be called when appropriate action has been received', () => {
   brandgilityEmbeddedApi.on(action, callback);
 
   const messageEvent = new MessageEvent('message', {
@@ -20,4 +25,61 @@ test('callback should be called when appropriate action + key has been received'
   window.dispatchEvent(messageEvent);
 
   expect(callback).toHaveBeenCalled();
+});
+
+test('callback should be called with payload sent with action', () => {
+  const payload = {
+    someField: 'someValue',
+  };
+
+  brandgilityEmbeddedApi.on(action, callback);
+
+  const messageEvent = new MessageEvent('message', {
+    data: { identityKey, action, payload },
+    source: iframe.contentWindow,
+  });
+
+  window.dispatchEvent(messageEvent);
+
+  expect(callback).toHaveBeenCalledWith(payload);
+});
+
+test('callback should NOT be called when received action from unexpected event source', () => {
+  const differentIframe = document.createElement('iframe');
+
+  document.body.append(differentIframe);
+
+  const messageEvent = new MessageEvent('message', {
+    data: { identityKey, action },
+    source: differentIframe.contentWindow,
+  });
+
+  window.dispatchEvent(messageEvent);
+
+  expect(callback).not.toHaveBeenCalled();
+});
+
+test('callback should NOT be called when received unregistered action', () => {
+  const messageEvent = new MessageEvent('message', {
+    data: { identityKey, action },
+    source: iframe.contentWindow,
+  });
+
+  window.dispatchEvent(messageEvent);
+
+  expect(callback).not.toHaveBeenCalled();
+});
+
+test('callback should NOT be called after destroy', () => {
+  brandgilityEmbeddedApi.on(action, callback);
+  brandgilityEmbeddedApi.destroy();
+
+  const messageEvent = new MessageEvent('message', {
+    data: { identityKey, action },
+    source: iframe.contentWindow,
+  });
+
+  window.dispatchEvent(messageEvent);
+
+  expect(callback).not.toHaveBeenCalled();
 });
