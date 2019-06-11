@@ -79,7 +79,7 @@ jobs:
           at: .
       - add_ssh_keys:
           fingerprints:
-            - "07:8c:2b:72:8d:e7:ce:9b:8a:ed:0c:d2:e9:fe:06:6b"
+            - "8b:c1:3f:ed:f6:5d:a8:85:c9:70:56:88:8f:87:11:49"
       - run:
           name: Create ~/.ssh
           command: |
