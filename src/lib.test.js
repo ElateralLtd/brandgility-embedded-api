@@ -44,20 +44,27 @@ test('callback should be called with payload sent with action', () => {
   expect(callback).toHaveBeenCalledWith(payload);
 });
 
-test('callback should NOT be called when received action from unexpected event source', () => {
-  const differentIframe = document.createElement('iframe');
+test('callback should NOT be called when received action from unexpected event source', () => (
+  new Promise((done) => {
+    const differentIframe = document.createElement('iframe');
 
-  document.body.append(differentIframe);
+    document.body.append(differentIframe);
 
-  const messageEvent = new MessageEvent('message', {
-    data: { identityKey, action },
-    source: differentIframe.contentWindow,
-  });
+    const messageEvent = new MessageEvent('message', {
+      data: { identityKey, action },
+      source: differentIframe.contentWindow,
+    });
 
-  window.dispatchEvent(messageEvent);
+    window.addEventListener('message', ({ data }) => {
+      expect(data.action).toBe(action);
+      expect(data.identityKey).toBe(identityKey);
+      expect(callback).not.toHaveBeenCalled();
+      done();
+    });
 
-  expect(callback).not.toHaveBeenCalled();
-});
+    window.dispatchEvent(messageEvent);
+  })
+));
 
 test('callback should NOT be called when received unregistered action', () => {
   const messageEvent = new MessageEvent('message', {
