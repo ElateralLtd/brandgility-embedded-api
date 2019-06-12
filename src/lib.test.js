@@ -83,3 +83,14 @@ test('callback should NOT be called after destroy', () => {
 
   expect(callback).not.toHaveBeenCalled();
 });
+
+test('callback should be called when emit is called with appropriate action', () => (
+  new Promise((done) => {
+    iframe.contentWindow.addEventListener('message', ({ data }) => {
+      expect(data.action).toBe(action);
+      expect(data.identityKey).toBe(identityKey);
+      done();
+    });
+    brandgilityEmbeddedApi.emit(action);
+  })
+));
