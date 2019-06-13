@@ -44,27 +44,28 @@ test('callback should be called with payload sent with action', () => {
   expect(callback).toHaveBeenCalledWith(payload);
 });
 
-test('callback should NOT be called when received action from unexpected event source', () => (
-  new Promise((done) => {
-    const differentIframe = document.createElement('iframe');
+test('callback should NOT be called when received action from unexpected event source', (done) => {
+  const differentIframe = document.createElement('iframe');
 
-    document.body.append(differentIframe);
+  document.body.append(differentIframe);
 
-    const messageEvent = new MessageEvent('message', {
-      data: { identityKey, action },
-      source: differentIframe.contentWindow,
-    });
+  const messageEvent = new MessageEvent('message', {
+    data: { identityKey, action },
+    source: differentIframe.contentWindow,
+  });
 
-    window.addEventListener('message', ({ data }) => {
-      expect(data.action).toBe(action);
-      expect(data.identityKey).toBe(identityKey);
-      expect(callback).not.toHaveBeenCalled();
-      done();
-    });
+  const messageHandler = ({ data }) => {
+    expect(data.action).toBe(action);
+    expect(data.identityKey).toBe(identityKey);
+    expect(callback).not.toHaveBeenCalled();
 
-    window.dispatchEvent(messageEvent);
-  })
-));
+    window.removeEventListener('message', messageHandler);
+    done();
+  };
+
+  window.addEventListener('message', messageHandler);
+  window.dispatchEvent(messageEvent);
+});
 
 test('callback should NOT be called when received unregistered action', () => {
   const messageEvent = new MessageEvent('message', {
@@ -91,13 +92,12 @@ test('callback should NOT be called after destroy', () => {
   expect(callback).not.toHaveBeenCalled();
 });
 
-test('callback should be called when emit is called with appropriate action', () => (
-  new Promise((done) => {
-    iframe.contentWindow.addEventListener('message', ({ data }) => {
-      expect(data.action).toBe(action);
-      expect(data.identityKey).toBe(identityKey);
-      done();
-    });
-    brandgilityEmbeddedApi.emit(action);
-  })
-));
+test('callback should be called when emit is called with appropriate action', (done) => {
+  iframe.contentWindow.addEventListener('message', ({ data }) => {
+    expect(data.action).toBe(action);
+    expect(data.identityKey).toBe(identityKey);
+    done();
+  });
+
+  brandgilityEmbeddedApi.emit(action);
+});
