@@ -15,9 +15,7 @@ beforeEach(() => {
 });
 
 test('callback should be called with payload sent with action', () => {
-  const payload = {
-    someField: 'someValue',
-  };
+  const payload = { someField: 'someValue' };
   const messageEvent = new MessageEvent('message', {
     data: { identityKey, action, payload },
     source: iframe.contentWindow,
@@ -49,7 +47,6 @@ test('callback should NOT be called when received action from unexpected event s
   });
 
   brandgilityEmbeddedApi.on(action, callback);
-
   window.addEventListener('message', messageHandler);
   window.dispatchEvent(messageEvent);
 });
@@ -64,7 +61,6 @@ test('callback should NOT be called when received unregistered action', () => {
   });
 
   brandgilityEmbeddedApi.on(action, callback);
-
   window.dispatchEvent(messageEvent);
 
   expect(callback).not.toHaveBeenCalled();
@@ -78,7 +74,6 @@ test('callback should NOT be called after destroy', () => {
 
   brandgilityEmbeddedApi.on(action, callback);
   brandgilityEmbeddedApi.destroy();
-
   window.dispatchEvent(messageEvent);
 
   expect(callback).not.toHaveBeenCalled();
