@@ -14,19 +14,6 @@ beforeEach(() => {
   brandgilityEmbeddedApi = new BrandgilityEmbeddedApi(iframe.contentWindow);
 });
 
-test('callback should be called when appropriate action has been received', () => {
-  brandgilityEmbeddedApi.on(action, callback);
-
-  const messageEvent = new MessageEvent('message', {
-    data: { identityKey, action },
-    source: iframe.contentWindow,
-  });
-
-  window.dispatchEvent(messageEvent);
-
-  expect(callback).toHaveBeenCalled();
-});
-
 test('callback should be called with payload sent with action', () => {
   const payload = {
     someField: 'someValue',
@@ -48,6 +35,7 @@ test('callback should NOT be called when received action from unexpected event s
   const differentIframe = document.createElement('iframe');
 
   document.body.append(differentIframe);
+  brandgilityEmbeddedApi.on(action, callback);
 
   const messageEvent = new MessageEvent('message', {
     data: { identityKey, action },
@@ -69,9 +57,14 @@ test('callback should NOT be called when received action from unexpected event s
 
 test('callback should NOT be called when received unregistered action', () => {
   const messageEvent = new MessageEvent('message', {
-    data: { identityKey, action },
+    data: {
+      action: 'different action',
+      identityKey,
+    },
     source: iframe.contentWindow,
   });
+
+  brandgilityEmbeddedApi.on(action, callback);
 
   window.dispatchEvent(messageEvent);
 
@@ -92,7 +85,7 @@ test('callback should NOT be called after destroy', () => {
   expect(callback).not.toHaveBeenCalled();
 });
 
-test('callback should be called when emit is called with appropriate action', (done) => {
+test('callback in iframe should be called when emit is called with appropriate action', (done) => {
   iframe.contentWindow.addEventListener('message', ({ data }) => {
     expect(data.action).toBe(action);
     expect(data.identityKey).toBe(identityKey);
