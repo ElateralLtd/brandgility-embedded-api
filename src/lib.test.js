@@ -18,13 +18,12 @@ test('callback should be called with payload sent with action', () => {
   const payload = {
     someField: 'someValue',
   };
-
-  brandgilityEmbeddedApi.on(action, callback);
-
   const messageEvent = new MessageEvent('message', {
     data: { identityKey, action, payload },
     source: iframe.contentWindow,
   });
+
+  brandgilityEmbeddedApi.on(action, callback);
 
   window.dispatchEvent(messageEvent);
 
@@ -35,12 +34,6 @@ test('callback should NOT be called when received action from unexpected event s
   const differentIframe = document.createElement('iframe');
 
   document.body.append(differentIframe);
-  brandgilityEmbeddedApi.on(action, callback);
-
-  const messageEvent = new MessageEvent('message', {
-    data: { identityKey, action },
-    source: differentIframe.contentWindow,
-  });
 
   const messageHandler = ({ data }) => {
     expect(data.action).toBe(action);
@@ -50,6 +43,12 @@ test('callback should NOT be called when received action from unexpected event s
     window.removeEventListener('message', messageHandler);
     done();
   };
+  const messageEvent = new MessageEvent('message', {
+    data: { identityKey, action },
+    source: differentIframe.contentWindow,
+  });
+
+  brandgilityEmbeddedApi.on(action, callback);
 
   window.addEventListener('message', messageHandler);
   window.dispatchEvent(messageEvent);
@@ -72,13 +71,13 @@ test('callback should NOT be called when received unregistered action', () => {
 });
 
 test('callback should NOT be called after destroy', () => {
-  brandgilityEmbeddedApi.on(action, callback);
-  brandgilityEmbeddedApi.destroy();
-
   const messageEvent = new MessageEvent('message', {
     data: { identityKey, action },
     source: iframe.contentWindow,
   });
+
+  brandgilityEmbeddedApi.on(action, callback);
+  brandgilityEmbeddedApi.destroy();
 
   window.dispatchEvent(messageEvent);
 
