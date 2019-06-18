@@ -28,17 +28,17 @@ brandgilityEmbeddedApi.on('load', () => console.info('loaded'));
 | event |description|arguments|
 |:-----:|-----|:-----:|
 | load | load event | entity { `type`: <`String`> , id: <`String`> } |
-| saved | success save event | id of saved item <`Number`> |
+| save | success save event | id of saved item <`Number`> |
 | error | error event | error message <`String`> |
 
 *****
 
 ## Events to emit
 ### To emit an event use `emit` method:
-```
+```js
 brandgilityEmbeddedApi.emit('save');
 ```
 
 | event |description | arguments |
 |:-----:|-----|:-----:|
-| save | load event | entity { `type`: <`String`> , id: <`String`> } |
+| save | save event | - |
