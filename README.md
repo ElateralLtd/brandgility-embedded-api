@@ -14,8 +14,8 @@
 
 | method | description | params |
 |:-----:|:-----:|:-----:|:-----:|
-| on | subscribes to event | eventName: <`String`>, callback: <`function`> |
-| emit | triggers an event | eventName: <`String`>, argument: <`Any`> |
+| `on` | subscribes to event | eventName: <`String`>, callback: <`function`> |
+| `emit` | triggers an event | eventName: <`String`>, argument: <`Any`> |
 
 *****
 
@@ -27,9 +27,9 @@ brandgilityEmbeddedApi.on('load', () => console.info('loaded'));
 
 | event |description|arguments|
 |:-----:|-----|:-----:|
-| load | load event | entity { `type`: <`String`> , id: <`String`> } |
-| save | success save event | id of saved item <`Number`> |
-| error | error event | error message <`String`> |
+| `load` | load event | entity { `type`: <`String`> , id: <`String`> } |
+| `save` | success save event | id of saved item <`Number`> |
+| `error` | error event | error { `message`: <`String`> } |
 
 *****
 
@@ -41,4 +41,6 @@ brandgilityEmbeddedApi.emit('save');
 
 | event |description | arguments |
 |:-----:|-----|:-----:|
-| save | save event | - |
+| `save` | saves a current version of template | - |
+| `saveAs` | creates a new item from current one | new item { `name`: <`String`>, `comments`: <`String`> } |
+
