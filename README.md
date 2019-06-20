@@ -12,7 +12,7 @@
 
 ## Methods
 
-| method | description | params |
+| method | description | parameters |
 |:-----:|:-----:|:-----:|:-----:|
 | `on` | subscribes to event | eventName: <`String`>, callback: <`function`> |
 | `emit` | triggers an event | eventName: <`String`>, argument: <`Any`> |
@@ -25,7 +25,7 @@
 brandgilityEmbeddedApi.on('load', () => console.info('loaded'));
 ```
 
-| event |description|arguments|
+| event | description | arguments |
 |:-----:|-----|:-----:|
 | `load` | load event | entity { `type`: <`String`> , id: <`String`> } |
 | `save` | success save event | id of saved item <`Number`> |
@@ -39,7 +39,7 @@ brandgilityEmbeddedApi.on('load', () => console.info('loaded'));
 brandgilityEmbeddedApi.emit('save');
 ```
 
-| event |description | arguments |
+| event | description | parameters |
 |:-----:|-----|:-----:|
 | `save` | saves a current version of template | - |
 | `saveAs` | creates a new item from current one | new item { `name`: <`String`>, `comments`: <`String`> } |
