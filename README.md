@@ -14,7 +14,7 @@
 
 | method | description | parameters |
 |:-----:|:-----:|:-----:|:-----:|
-| `on` | subscribes to event | eventName: <`String`>, callback: <`function`> |
+| `on` | subscribes to event | eventName: <`String`>, callback: <`Function`> |
 | `emit` | triggers an event | eventName: <`String`>, argument: <`Any`> |
 
 *****
