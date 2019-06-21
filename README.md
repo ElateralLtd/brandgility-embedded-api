@@ -1,6 +1,6 @@
-# Brandgility's iframe embedding:
-- get the id of template to be configured
-- copy and paste this template into your page/component, `:id` in `src` attribute should be replaced with template's id:
+# How to embed Brandgility's configurator into an iframe:
+- get the id of template to be configured from Brandgility application
+- copy and paste below code into your page/component, replace `:id` in `src` attribute with your template's id:
 ```html
 <iframe
   style={{ width: '100%', height: '100%', border: 'none' }}
@@ -8,7 +8,7 @@
 ```
 
 # API library
-*Brandgility embedded api library allows you to use configurator*
+*Brandgility embedded api library allows you to issue commands to Brandgility configurator in embedded mode*
 
 ## Methods
 
@@ -33,8 +33,8 @@ brandgilityEmbeddedApi.on('load', () => console.info('loaded'));
 
 *****
 
-## Events to emit
-### To emit an event use `emit` method:
+## Events to trigger
+### To trigger an event use `emit` method:
 ```js
 brandgilityEmbeddedApi.emit('save');
 ```
@@ -42,5 +42,5 @@ brandgilityEmbeddedApi.emit('save');
 | event | description | parameters |
 |:-----:|-----|:-----:|
 | `save` | saves a current version of template | - |
-| `saveAs` | creates a new item from current one | new item { `name`: <`String`>, `comments`: <`String`> } |
+| `saveAs` | creates a new saved customization from an existing saved customization | new item { `name`: <`String`>, `comments`: <`String`> } |
 
