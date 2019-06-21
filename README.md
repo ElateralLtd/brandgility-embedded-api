@@ -12,8 +12,8 @@
 
 | method | description | parameters |
 |:-----:|:-----:|:-----:|:-----:|
-| `on` | subscribes to event | eventName: <`string`>, callback: <`function`> |
-| `emit` | triggers an event | eventName: <`string`>, argument: <serializable, see [The structured clone algorithm](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Structured_clone_algorithm)> |
+| `on` | subscribes to event | eventName: <`string`>, argument: <`function`> |
+| `emit` | triggers an event | eventName: <`string`>, argument: serializable, [more info](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Structured_clone_algorithm) |
 
 *****
 
