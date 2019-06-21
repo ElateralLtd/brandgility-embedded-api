@@ -2,9 +2,7 @@
 - get the id of template to be configured from Brandgility application
 - copy and paste below code into your page/component, replace `:id` in `src` attribute with your template's id:
 ```html
-<iframe
-  style={{ width: '100%', height: '100%', border: 'none' }}
-  src="<BRANDGILITY_ENDPOINT>/embedded-template-configure/{new|edit}/:id" />
+<iframe src="<BRANDGILITY_ENDPOINT>/embedded-template-configure/{new|edit}/:id" />
 ```
 
 # API library
@@ -14,8 +12,8 @@
 
 | method | description | parameters |
 |:-----:|:-----:|:-----:|:-----:|
-| `on` | subscribes to event | eventName: <`String`>, callback: <`Function`> |
-| `emit` | triggers an event | eventName: <`String`>, argument: <`Any`> |
+| `on` | subscribes to event | eventName: <`string`>, callback: <`function`> |
+| `emit` | triggers an event | eventName: <`string`>, argument: <serializable, see [The structured clone algorithm](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Structured_clone_algorithm)> |
 
 *****
 
@@ -27,9 +25,9 @@ brandgilityEmbeddedApi.on('load', () => console.info('loaded'));
 
 | event | description | arguments |
 |:-----:|-----|:-----:|
-| `load` | load event | entity { `type`: <`String`> , id: <`String`> } |
-| `save` | success save event | id of saved item <`Number`> |
-| `error` | error event | error { `message`: <`String`> } |
+| `load` | load event | entity { `type`: <`string`> , id: <`string`> } |
+| `save` | success save event | id of saved item <`string`> |
+| `error` | error event | error { `message`: <`string`> } |
 
 *****
 
@@ -42,5 +40,5 @@ brandgilityEmbeddedApi.emit('save');
 | event | description | parameters |
 |:-----:|-----|:-----:|
 | `save` | saves a current version of template | - |
-| `saveAs` | creates a new saved customization from an existing saved customization | new item { `name`: <`String`>, `comments`: <`String`> } |
+| `saveAs` | creates a new saved customization from an existing saved customization | new item { `name`: <`string`>, `comments`: <`string`> } |
 
