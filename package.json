@@ -1,6 +1,6 @@
 {
   "name": "@elateral/brandgility-embedded-api",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Brandgility embedded mode library",
   "repository": "https://github.com/ElateralLtd/brandgility-embedded-api.git",
   "main": "lib/brandgility-embedded-api.js",

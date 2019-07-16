@@ -7,12 +7,10 @@ const getResolve = require('./webpack.resolve');
 
 dotenv.config();
 
-const { NODE_ENV } = process.env;
-
-if (!NODE_ENV) {
+if (!process.env.NODE_ENV) {
   throw new Error('NODE_ENV is not set. You should fix it before continue.');
-} else if (!['development', 'production', 'test'].includes(NODE_ENV)) {
-  throw new Error(`"${NODE_ENV}" is not a valid NODE_ENV value!`);
+} else if (!['development', 'production', 'test'].includes(process.env.NODE_ENV)) {
+  throw new Error(`"${process.env.NODE_ENV}" is not a valid NODE_ENV value!`);
 }
 
 module.exports = (env) => ({
@@ -21,9 +19,10 @@ module.exports = (env) => ({
   output: {
     path: path.resolve('lib'),
     filename: 'brandgility-embedded-api.js',
-    libraryTarget: 'commonjs2',
+    library: 'BrandgilityEmbeddedApi',
+    libraryExport: 'default',
+    libraryTarget: 'umd',
   },
-  target: 'node',
   optimization: getOptimization(env),
   module: getModule(env),
   resolve: getResolve(env),
