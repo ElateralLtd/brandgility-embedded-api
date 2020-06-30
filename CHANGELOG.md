@@ -3,6 +3,7 @@
 ## Unreleased - [DIFF](https://github.com/ElateralLtd/brandgility-embedded-api/compare/v0.2.0...HEAD)
 
 ## 0.2.0 - 2020-06-30 - [DIFF](https://github.com/ElateralLtd/brandgility-embedded-api/compare/v0.1.2...v0.2.0)
+- Added `yarn-deduplicate`
 - Updated `@babel/core` to `^7.10.3`
 - Updated `@babel/plugin-proposal-class-properties` to `^7.10.1`
 - Updated `@babel/plugin-proposal-export-default-from` to `^7.10.1`
