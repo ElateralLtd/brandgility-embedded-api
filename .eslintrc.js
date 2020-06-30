@@ -79,7 +79,9 @@ module.exports = {
     "jest/prefer-strict-equal": "error",
     "jest/prefer-to-be-null": "error",
     "jest/prefer-to-be-undefined": "error",
+    "jest/no-test-callback": "off",
 
     "unicorn/prevent-abbreviations": "off",
+    "unicorn/no-null": "off",
   },
 };
