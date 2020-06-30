@@ -1,8 +1,12 @@
 # How to embed Brandgility's configurator into an iframe:
 - get the id of template to be configured from Brandgility application
-- copy and paste below code into your page/component, replace `:id` in `src` attribute with your template's id:
+- To open an asset for customization, copy and paste below code into your page/component, replace `:id` in `src` attribute with your template's id:
 ```html
-<iframe src="<BRANDGILITY_ENDPOINT>/embedded-template-configure/{new|edit}/:id" />
+<iframe src="<BRANDGILITY_ENDPOINT>/embedded-template-configure/{new|edit}/:id?action=DRAFT_TEMPLATE_CONFIGURATION_START&eid=:id&embedded=true" />
+```
+- To configure an already saved template customization, copy and paste below code into your page/component, replace `:id` in `src` attribute with your saved template customization id:
+```html
+<iframe src="<BRANDGILITY_ENDPOINT>/embedded-template-configure/{new|edit}/:id?action=DRAFT_TEMPLATE_CONFIGURATION_EDIT&eid=:id&embedded=true" />
 ```
 
 # API library
