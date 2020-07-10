@@ -1,9 +1,18 @@
 # CHANGELOG
 
-## Unreleased - [DIFF](https://github.com/ElateralLtd/brandgility-embedded-api/compare/v0.2.1...HEAD)
+## Unreleased - [DIFF](https://github.com/ElateralLtd/brandgility-embedded-api/compare/v1.0.1...HEAD)
 
-## 0.2.1 - 2020-07-10 - [DIFF](https://github.com/ElateralLtd/brandgility-embedded-api/compare/v0.2.0...v0.2.1)
+## 1.0.1 - 2020-07-10 - [DIFF](https://github.com/ElateralLtd/brandgility-embedded-api/compare/v1.0.0...v1.0.1)
 - Updated `browserslist` to support more browser versions
+
+## 1.0.0 - 2020-06-30 - [DIFF](https://github.com/ElateralLtd/brandgility-embedded-api/compare/v0.2.0...v1.0.0)
+- __breaking:__ updated node to `>=14.5.0`
+- Updated `@babel/core` to `^7.10.4`
+- Updated `@babel/plugin-proposal-export-default-from` to `^7.10.4`
+- Updated `@babel/plugin-proposal-export-namespace-from` to `^7.10.4`
+- Updated `@babel/plugin-proposal-private-methods` to `^7.10.4`
+- Updated `@babel/preset-env` to `^7.10.4`
+- Removed `@babel/plugin-proposal-class-properties`
 
 ## 0.2.0 - 2020-06-30 - [DIFF](https://github.com/ElateralLtd/brandgility-embedded-api/compare/v0.1.2...v0.2.0)
 - Added `yarn-deduplicate`
