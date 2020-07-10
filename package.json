@@ -1,6 +1,6 @@
 {
   "name": "@elateral/brandgility-embedded-api",
-  "version": "0.2.0",
+  "version": "1.0.0",
   "description": "Brandgility embedded mode library",
   "repository": "https://github.com/ElateralLtd/brandgility-embedded-api.git",
   "main": "lib/brandgility-embedded-api.js",
@@ -31,16 +31,15 @@
   ],
   "license": "UNLICENSED",
   "engines": {
-    "node": ">=12.1.0"
+    "node": ">=14.5.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.10.3",
-    "@babel/plugin-proposal-class-properties": "^7.10.1",
-    "@babel/plugin-proposal-export-default-from": "^7.10.1",
-    "@babel/plugin-proposal-export-namespace-from": "^7.10.1",
-    "@babel/plugin-proposal-private-methods": "^7.10.1",
+    "@babel/core": "^7.10.4",
+    "@babel/plugin-proposal-export-default-from": "^7.10.4",
+    "@babel/plugin-proposal-export-namespace-from": "^7.10.4",
+    "@babel/plugin-proposal-private-methods": "^7.10.4",
     "@babel/plugin-syntax-dynamic-import": "^7.8.3",
-    "@babel/preset-env": "^7.10.3",
+    "@babel/preset-env": "^7.10.4",
     "@commitlint/cli": "^9.0.1",
     "@commitlint/is-ignored": "^9.0.1",
     "babel-eslint": "^10.1.0",
