@@ -19,6 +19,7 @@
     "deploy": "yarn publish --access public --new-version $npm_package_version",
     "update-master-if-version-is-increased": "node ./bin/update-master-if-version-is-increased.js",
     "coveralls": "minicat reports/test/coverage/lcov.info | coveralls",
+    "update": "yarn upgrade",
     "postupdate": "bin/yarn-deduplicate.sh",
     "prepare": "bin/yarn-deduplicate.sh",
     "postuninstall": "bin/yarn-deduplicate.sh"
