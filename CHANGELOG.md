@@ -1,6 +1,9 @@
 # CHANGELOG
 
-## Unreleased - [DIFF](https://github.com/ElateralLtd/brandgility-embedded-api/compare/v0.2.0...HEAD)
+## Unreleased - [DIFF](https://github.com/ElateralLtd/brandgility-embedded-api/compare/v0.2.1...HEAD)
+
+## 0.2.1 - 2020-07-10 - [DIFF](https://github.com/ElateralLtd/brandgility-embedded-api/compare/v0.2.0...v0.2.1)
+- Updated `browserslist` to support more browser versions
 
 ## 0.2.0 - 2020-06-30 - [DIFF](https://github.com/ElateralLtd/brandgility-embedded-api/compare/v0.1.2...v0.2.0)
 - Added `yarn-deduplicate`
