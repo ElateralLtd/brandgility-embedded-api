@@ -1,6 +1,9 @@
 # CHANGELOG
 
-## Unreleased - [DIFF](https://github.com/ElateralLtd/brandgility-embedded-api/compare/v1.0.0...HEAD)
+## Unreleased - [DIFF](https://github.com/ElateralLtd/brandgility-embedded-api/compare/v1.0.1...HEAD)
+
+## 1.0.1 - 2020-07-10 - [DIFF](https://github.com/ElateralLtd/brandgility-embedded-api/compare/v1.0.0...v1.0.1)
+- Updated `browserslist` to support more browser versions
 
 ## 1.0.0 - 2020-06-30 - [DIFF](https://github.com/ElateralLtd/brandgility-embedded-api/compare/v0.2.0...v1.0.0)
 - __breaking:__ updated node to `>=14.5.0`
