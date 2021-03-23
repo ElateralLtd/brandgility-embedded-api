@@ -140,6 +140,10 @@ workflows:
           filters:
             branches:
               ignore: master
+      - vulnerabilityAudit:
+            context: org-global
+            requires:
+              - prepare
       - test-with-coverage:
           context: org-global
           requires:
@@ -174,10 +178,6 @@ workflows:
           context: org-global
           requires:
             - prepare
-      - vulnerabilityAudit:
-            context: org-global
-            requires:
-              - build
       - deploy:
           context: org-global
           requires:
