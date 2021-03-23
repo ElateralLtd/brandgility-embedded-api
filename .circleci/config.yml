@@ -65,7 +65,7 @@ jobs:
           command: yarn run build
   vulnerabilityAudit:
     docker:
-      - image: circleci/node:14.16.0
+    - image: circleci/node:14.16.0
     steps:
       - checkout
       - attach_workspace:
@@ -74,6 +74,7 @@ jobs:
           name: Check Tools Versions
           command: |
             echo "jq version: $(jq --version)"
+            echo "npm version: $(npm --version)"
             echo "yarn version: $(yarn --version)"
       - run:
           name: make audit folder
@@ -81,23 +82,27 @@ jobs:
       - run:
           name: Install "audit-html tools"
           command: |
-            sudo yarn global add yarn-audit-html
             sudo npm install -g npm-audit-html
       - run:
-          name: Create yarn html report
-          command: |      
-            set -x; set +e; yarn audit --json | yarn-audit-html --output audit/yarn-audit.html; set -e; exit 0
+          name: Create npm lockfile
+          command: |
+            echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN_RO" > ~/.npmrc
+            npm i --package-lock-only
+      - run:
+          name: Create npm html report
+          command: |
+            set -x; set +e; npm audit --json | npm-audit-html --output audit/npm-audit.html; set -e; exit 0
       - run:
           name: Create audit jsons
           command: |
             set -x; set +e; \
-            yarn audit --json > audit/audit-results-yarn.json; \
-            echo "yarn version: $(yarn --version)" > audit/audit-summary-yarn; chmod 666 audit/audit-summary-yarn; \
+            npm audit --json > audit/audit-results-npm.json; \
+            echo "npm version: $(npm --version)" > audit/audit-summary-npm; chmod 666 audit/audit-summary-npm; \
             set -e; exit 0
       - run:
           name: Summary collect
           command: |
-            bin/summary-yarn.sh >> audit/audit-summary-yarn
+            bin/summary-npm.sh >> audit/audit-summary-npm
       - store_artifacts:
           path: ./audit
   deploy:
